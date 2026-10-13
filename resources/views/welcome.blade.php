@@ -20,11 +20,11 @@
             </p>
             <div class="mt-4 d-flex justify-content-center gap-2 flex-wrap">
                 <!-- Кнопка відкриття форми участі -->
-                <button type="button" class="btn btn-warning px-4 py-2 fw-bold text-dark shadow-sm" data-bs-toggle="modal" data-bs-target="#registerModal">
+                <a href="{{route('participation.form')}}" class="btn btn-warning px-4 py-2 fw-bold text-dark shadow-sm">
                     <i class="bi bi-pencil-square me-1"></i> Взяти участь
-                </button>
+                </a>
                 <a href="#categories" class="btn btn-outline-light px-4 py-2">Номінації</a>
-                <a href="#author" class="btn btn-outline-secondary text-light px-3 py-2">Паспорт проєкту</a>
+                <a href="{{route('site.passport')}}" class="btn btn-outline-secondary text-light px-3 py-2">Паспорт проєкту</a>
             </div>
         </div>
     </section>
@@ -34,9 +34,9 @@
         <div id="categories" class="mb-5">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2 class="fw-bold border-start border-4 border-warning ps-3 mb-0">Номінації виставки</h2>
-                <button type="button" class="btn btn-outline-warning btn-sm d-none d-md-inline-block text-dark border-warning" data-bs-toggle="modal" data-bs-target="#registerModal">
+                <a href="{{route('participation.form')}}" class="btn btn-outline-warning btn-sm d-none d-md-inline-block text-dark border-warning">
                     Подати модель на конкурс
-                </button>
+                </a>
             </div>
 
             <div class="row g-4">
@@ -130,57 +130,6 @@
                         </div>
                     </div>
                     <small class="text-muted mt-3">Фреймворк: Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})</small>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Модальне вікно "Взяти участь" -->
-    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0 shadow">
-                <div class="modal-header bg-dark text-white">
-                    <h5 class="modal-title fw-bold" id="registerModalLabel">
-                        <i class="bi bi-card-checklist text-warning me-2"></i>Заявка на участь у виставці
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Закрити"></button>
-                </div>
-                <div class="modal-body p-4">
-                    <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Заявку зареєстровано!'); bootstrap.Modal.getInstance(document.getElementById('registerModal')).hide();">
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">ПІБ автора / моделіста</label>
-                            <input type="text" class="form-control" placeholder="Іваненко Іван" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Назва моделі / прототипу</label>
-                            <input type="text" class="form-control" placeholder="напр., Есмінець «Гетьман Сагайдачний»" required>
-                        </div>
-                        <div class="row g-2 mb-3">
-                            <div class="col-md-6">
-                                <label class="form-label fw-semibold">Категорія</label>
-                                <select class="form-select" required>
-                                    <option value="" selected disabled>Оберіть...</option>
-                                    <option value="afv">Бронетехніка (БТТ)</option>
-                                    <option value="aviation">Авіація</option>
-                                    <option value="fleet">Флот та судна</option>
-                                    <option value="diorama">Діорами</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label fw-semibold">Масштаб</label>
-                                <input type="text" class="form-control" placeholder="1:350, 1:72..." required>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Виробник набору (Kit manufacturer)</label>
-                            <input type="text" class="form-control" placeholder="MiniArt, ICM, Tamiya, Trumpeter...">
-                        </div>
-                        <div class="d-grid mt-4">
-                            <button type="submit" class="btn btn-warning fw-bold py-2 text-dark">
-                                Надіслати заявку
-                            </button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
