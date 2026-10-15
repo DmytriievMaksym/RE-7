@@ -43,10 +43,11 @@
                         <label for="category" class="form-label fw-semibold">Категорія</label>
                         <select name="category" id="category" class="form-select">
                             <option value="" disabled {{ old('category') ? '' : 'selected' }}>Оберіть категорію...</option>
-                            <option value="Бронетехніка" {{ old('category') == 'Бронетехніка' ? 'selected' : '' }}>Бронетехніка та інша наземна техніка</option>
-                            <option value="Авіація" {{ old('category') == 'Авіація' ? 'selected' : '' }}>Авіація</option>
-                            <option value="Флот" {{ old('category') == 'Флот' ? 'selected' : '' }}>Флот та судна</option>
-                            <option value="Діорами" {{ old('category') == 'Діорами' ? 'selected' : '' }}>Діорами</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->value }}" {{ old('category') == $category->value ? 'selected' : '' }}>
+                                    {{ $category->label() }}
+                                </option>
+                            @endforeach
                         </select>
                         @error('category')
                         <p class="error text-danger small mt-1 mb-0">{{$message}}</p>
