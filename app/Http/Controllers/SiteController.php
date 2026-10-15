@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\EntryRequest;
 use App\Http\Requests\ParticipationRequest;
 use App\Mail\ParticipationMail;
+use App\Enums\CategoryEnum;
 
 class SiteController extends Controller
 {
@@ -23,15 +24,23 @@ class SiteController extends Controller
     }
 
     public function participation(){
-        return view('site.participation');
+        return view('site.participation', ['categories' => CategoryEnum::cases()]);
     }
 
     public function participationStore(ParticipationRequest $request){
         Mail::to($request->email)->send(new ParticipationMail($request->validated()));
-        return view('site.participation-confirm', $request->validated());
+        return redirect()
+            ->route('participation.confirm')
+            ->with('formData', $request->validated());
     }
 
-    public function passport(){
+    public function participationConfirm(){
+        if (!session()->has('formData')) {
+            return redirect()->route('participation.form');
+        }
+        return view('site.participation-confirm', ['data' => session('formData')]);
+    }
+    public function getPassport(){
         $projectData = [
             'author' => 'Дмитрієв М.А.',
             'group' => 'РЕ-51',

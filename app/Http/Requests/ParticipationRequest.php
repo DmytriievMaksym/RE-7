@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
+use App\Enums\CategoryEnum;
 
 class ParticipationRequest extends FormRequest
 {
@@ -27,7 +29,7 @@ class ParticipationRequest extends FormRequest
             'email' => ['required','email'],
             'phone' => ['nullable', 'regex:/^\d{10}$/'],
             'model' => ['required','string'],
-            'category' => ['required', 'string', 'in:Бронетехніка,Авіація,Флот,Діорами'],
+            'category' => ['required', new Enum(CategoryEnum::class)],
             'scale' => ['required', 'regex:/^1:\d{2,3}$/'],
             /* Додати завантаження зображень*/
         ];

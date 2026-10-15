@@ -10,27 +10,27 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2">
                     <span class="text-secondary fw-semibold">Ім'я</span>
-                    <span class="fw-bold text-dark">{{$author}}</span>
+                    <span class="fw-bold text-dark">{{$data['author']}}</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2">
                     <span class="text-secondary fw-semibold">Email</span>
-                    <span class="fw-bold text-dark">{{$email}}</span>
+                    <span class="fw-bold text-dark">{{$data['email']}}</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2">
                     <span class="text-secondary fw-semibold">Номер телефону</span>
-                    <span class="fw-bold text-dark">{{$phone}}</span>
+                    <span class="fw-bold text-dark">{{$data['phone']}}</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2">
                     <span class="text-secondary fw-semibold">Модель</span>
-                    <span class="fw-bold text-dark">{{$model}}</span>
+                    <span class="fw-bold text-dark">{{$data['model']}}</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2">
                     <span class="text-secondary fw-semibold">Категорія</span>
-                    <span class="badge bg-dark text-warning">{{$category}}</span>
+                    <span class="badge bg-dark text-warning">{{$data['category']}}</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2">
                     <span class="text-secondary fw-semibold">Масштаб</span>
-                    <span class="badge bg-secondary font-monospace">{{$scale}}</span>
+                    <span class="badge bg-secondary font-monospace">{{$data['scale']}}</span>
                 </li>
             </ul>
         </div>
