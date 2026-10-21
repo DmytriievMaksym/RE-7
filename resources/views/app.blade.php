@@ -24,6 +24,46 @@
             background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
             border-bottom: 3px solid var(--model-accent);
         }
+        .hover-warning:hover {
+            color: #ffc107 !important;
+            text-decoration: underline !important;
+        }
+
+        .table > :not(caption) > * > * {
+            padding: 0.85rem 0.75rem;
+        }
+        .pagination .page-item.active .page-link {
+            background-color: #ffc107;
+            border-color: #ffc107;
+            color: #212529;
+            font-weight: 600;
+        }
+
+        .pagination .page-link {
+            color: #212529;
+        }
+
+        .pagination .page-link:hover {
+            color: #000;
+            background-color: #f8f9fa;
+            border-color: #dee2e6;
+        }
+
+        .pagination .page-link:focus {
+            box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25);
+        }
+
+        {{--Прибрав напис пагінації--}}
+        .pagination-wrapper p,
+        .card-footer p.small {
+            display: none !important;
+        }
+
+        .pagination-wrapper .pagination,
+        .card-footer .pagination {
+            margin-bottom: 0 !important;
+            justify-content: center;
+        }
     </style>
 </head>
 <body class="d-flex flex-column min-vh-100 bg-light text-dark">

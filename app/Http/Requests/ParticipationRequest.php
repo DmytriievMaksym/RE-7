@@ -27,10 +27,11 @@ class ParticipationRequest extends FormRequest
         return [
             'author' => ['required','string','max:255'],
             'email' => ['required','email'],
-            'phone' => ['nullable', 'regex:/^\d{10}$/'],
+            'phone' => ['nullable','regex:/^\d{10}$/'],
             'model' => ['required','string'],
-            'category' => ['required', new Enum(CategoryEnum::class)],
-            'scale' => ['required', 'regex:/^1:\d{2,3}$/'],
+            'categories' => ['required','array','min:1'],
+            'categories.*' => [new Enum(CategoryEnum::class)],
+            'scale' => ['required','regex:/^1:\d{2,3}$/'],
             /* Додати завантаження зображень*/
         ];
     }
@@ -42,7 +43,7 @@ class ParticipationRequest extends FormRequest
             'email.email' => 'Email введено некоректно.',
             'phone.regex' => 'Неправильно введений номер, приклад: 0671234567.',
             'model.required' => 'Поле "Назва моделі" не може бути порожнім.',
-            'category.required' => 'Оберіть одну з запропонованих категорій.',
+            'categories.required' => 'Оберіть мінімум одну з запропонованих категорій.',
             'scale.required' => 'Поле "Масштаб" не може бути порожнім.',
             'scale.regex' => 'Неправильно введений масштаб, приклад: 1:35.',
         ];

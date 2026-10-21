@@ -23,7 +23,7 @@
                 <a href="{{route('participation.form')}}" class="btn btn-warning px-4 py-2 fw-bold text-dark shadow-sm">
                     <i class="bi bi-pencil-square me-1"></i> Взяти участь
                 </a>
-                <a href="#categories" class="btn btn-outline-light px-4 py-2">Номінації</a>
+                <a href="{{route('model.index')}}" class="btn btn-outline-light px-4 py-2">Зареєстровані моделі</a>
                 <a href="{{route('site.passport')}}" class="btn btn-outline-secondary text-light px-3 py-2">Паспорт проєкту</a>
             </div>
         </div>
