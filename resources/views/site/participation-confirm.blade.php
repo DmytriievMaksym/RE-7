@@ -25,8 +25,12 @@
                     <span class="fw-bold text-dark">{{$data['model']}}</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2">
-                    <span class="text-secondary fw-semibold">Категорія</span>
-                    <span class="badge bg-dark text-warning">{{$data['category']}}</span>
+                    <span class="text-secondary fw-semibold">Обрані номінації</span>
+                    <div class="d-flex flex-wrap gap-1 justify-content-end">
+                        @foreach($data['categories'] as $category)
+                            <span class="badge bg-dark text-warning p-2">{{$category}}</span>
+                        @endforeach
+                    </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2">
                     <span class="text-secondary fw-semibold">Масштаб</span>

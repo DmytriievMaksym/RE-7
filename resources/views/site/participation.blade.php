@@ -40,17 +40,36 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="category" class="form-label fw-semibold">Категорія</label>
-                        <select name="category" id="category" class="form-select">
-                            <option value="" disabled {{ old('category') ? '' : 'selected' }}>Оберіть категорію...</option>
+                        <label class="form-label fw-semibold d-block">
+                            Номінації та категорії <span class="text-danger">*</span>
+                            <span class="text-muted fw-normal small">(оберіть одну або декілька)</span>
+                        </label>
+
+                        <div class="row g-2">
                             @foreach($categories as $category)
-                                <option value="{{ $category->value }}" {{ old('category') == $category->value ? 'selected' : '' }}>
-                                    {{ $category->label() }}
-                                </option>
+                                <div class="col-sm-6">
+                                    <div class="form-check p-3 border rounded-3 bg-light h-100 d-flex align-items-center gap-2">
+                                        <input
+                                            class="form-check-input ms-0 mt-0 flex-shrink-0"
+                                            type="checkbox"
+                                            name="categories[]"
+                                            id="cat_{{ $loop->index }}"
+                                            value="{{ $category->value }}"
+                                            {{ in_array($category->value, old('categories', [])) ? 'checked' : '' }}
+                                        >
+                                        <label class="form-check-label w-100 fw-semibold text-dark cursor-pointer user-select-none" for="cat_{{ $loop->index }}">
+                                            {{ $category->label() }}
+                                        </label>
+                                    </div>
+                                </div>
                             @endforeach
-                        </select>
-                        @error('category')
-                        <p class="error text-danger small mt-1 mb-0">{{$message}}</p>
+                        </div>
+
+                        @error('categories')
+                        <div class="text-danger small mt-2">{{ $message }}</div>
+                        @enderror
+                        @error('categories.*')
+                        <div class="text-danger small mt-1">{{ $message }}</div>
                         @enderror
                     </div>
 

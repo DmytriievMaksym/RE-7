@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ScaleModelController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\CountryController;
 
 Route::get('/say/{message?}', [SiteController::class, 'say'])->name('site.say');
 
@@ -17,3 +19,6 @@ Route::get('participation/confirm', [SiteController::class, 'participationConfir
 Route::view('/about','site.about')->name('site.about');
 Route::view('/contact','site.contact')->name('site.contact');
 Route::get('/passport', [SiteController::class, 'getPassport'])->name('site.passport');
+
+Route::resource('country', CountryController::class);
+Route::resource('model', ScaleModelController::class);

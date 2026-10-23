@@ -8,6 +8,7 @@ use App\Http\Requests\EntryRequest;
 use App\Http\Requests\ParticipationRequest;
 use App\Mail\ParticipationMail;
 use App\Enums\CategoryEnum;
+use App\Models\ScaleModel;
 
 class SiteController extends Controller
 {
@@ -29,6 +30,7 @@ class SiteController extends Controller
 
     public function participationStore(ParticipationRequest $request){
         Mail::to($request->email)->send(new ParticipationMail($request->validated()));
+        ScaleModel::create($request->validated());
         return redirect()
             ->route('participation.confirm')
             ->with('formData', $request->validated());

@@ -14,8 +14,14 @@
         <td style="padding: 8px 0;">{{ $messageData['model'] }}</td>
     </tr>
     <tr style="border-bottom: 1px solid #ddd;">
-        <td style="padding: 8px 0; font-weight: bold;">Категорія:</td>
-        <td style="padding: 8px 0;">{{ $messageData['category'] }}</td>
+        <td style="padding: 8px 0; font-weight: bold;">Номінації:</td>
+        <td style="padding: 8px 0;">
+            @foreach($messageData['categories'] as $category)
+                <span style="display: inline-block; background-color: #212529; color: #ffc107; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; margin-right: 4px; margin-bottom: 4px;">
+                    {{$category}}
+                </span>
+            @endforeach
+        </td>
     </tr>
     <tr style="border-bottom: 1px solid #ddd;">
         <td style="padding: 8px 0; font-weight: bold;">Масштаб:</td>
