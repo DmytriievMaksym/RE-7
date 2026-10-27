@@ -4,6 +4,7 @@ use App\Http\Controllers\ScaleModelController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\StatsController;
 
 Route::get('/say/{message?}', [SiteController::class, 'say'])->name('site.say');
 
@@ -22,3 +23,7 @@ Route::get('/passport', [SiteController::class, 'getPassport'])->name('site.pass
 
 Route::resource('country', CountryController::class);
 Route::resource('model', ScaleModelController::class);
+
+Route::get('/stats',[StatsController::class, 'pages'])->name('stats.pages');
+Route::get('/stats/detail', [StatsController::class, 'detail'])->name('stats.detail');
+Route::get('/stats/popular-models', [StatsController::class, 'popularModels'])->name('stats.popular');
