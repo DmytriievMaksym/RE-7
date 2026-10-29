@@ -80,6 +80,8 @@
                 <a class="nav-link active" href="/">Головна</a>
                 <a class="nav-link" href="#categories">Номінації</a>
                 <a class="nav-link" href="#schedule">Розклад</a>
+                <a class="nav-link" href="{{ route('country.index') }}">Країни</a>
+                <a class="nav-link" href="{{ route('stats.pages') }}">Статистика</a>
             </div>
         </div>
     </nav>
@@ -94,7 +96,7 @@
 <footer class="bg-scale-dark text-secondary py-4 border-top border-secondary mt-5">
     <div class="container text-center">
         <p class="mb-1 text-light">© {{ date('Y') }} Всеукраїнська виставка стендового моделізму | КПІ ім. Ігоря Сікорського</p>
-        <small class="text-secondary">Стенди • Діорами • Бронетехніка • Авіація • Флот</small>
+        <small class="text-secondary">Дмитрієв Максим РЕ-51</small>
     </div>
 </footer>
 
