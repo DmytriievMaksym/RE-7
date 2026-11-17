@@ -24,7 +24,8 @@
                 {{-- Головна картка форми --}}
                 <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
                     {{-- Шапка картки --}}
-                    <div class="card-header bg-dark text-white py-3 px-4 d-flex align-items-center justify-content-between">
+                    <div
+                        class="card-header bg-dark text-white py-3 px-4 d-flex align-items-center justify-content-between">
                         <div class="d-flex align-items-center gap-2">
                             <i class="bi bi-pencil-square text-warning fs-5"></i>
                             <h5 class="mb-0 fw-bold text-uppercase tracking-wide">
@@ -44,29 +45,33 @@
 
                             {{-- Підключення форми з полями --}}
                             <div class="mb-4">
-                                @include('model.form')
+                                @include('model._form')
                             </div>
 
                             {{-- Кнопки --}}
-                            <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 pt-3 border-top">
-                                <a href="{{ route('model.index') }}" class="btn btn-outline-secondary px-4 py-2 rounded-3">
+                            <div
+                                class="d-flex flex-wrap justify-content-between align-items-center gap-3 pt-3 border-top">
+                                <a href="{{ route('model.index') }}"
+                                   class="btn btn-outline-secondary px-4 py-2 rounded-3">
                                     <i class="bi bi-arrow-left me-1"></i> Повернутися до списку моделей
                                 </a>
 
-                                <form method="POST" action="{{ route('model.destroy', $model) }}" onsubmit="return confirm('Ви впевнені, що хочете видалити експонат «{{ addslashes($model->name) }}»?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-outline-danger px-3 py-2 rounded-3">
-                                        <i class="bi bi-trash3-fill me-1"></i> Видалити
-                                    </button>
-                                </form>
-
-                                <button type="submit" class="btn btn-warning text-dark fw-bold px-4 py-2 rounded-3 shadow-sm">
+                                <button type="submit"
+                                        class="btn btn-warning text-dark fw-bold px-4 py-2 rounded-3 shadow-sm">
                                     <i class="bi bi-check-circle-fill me-1"></i> Зберегти зміни
                                 </button>
                             </div>
                         </form>
                     </div>
+
+                    <form method="POST" action="{{ route('model.destroy', $model) }}"
+                          onsubmit="return confirm('Ви впевнені, що хочете видалити експонат «{{ addslashes($model->name) }}»?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-outline-danger px-3 py-2 rounded-3">
+                            <i class="bi bi-trash3-fill me-1"></i> Видалити
+                        </button>
+                    </form>
                 </div>
 
             </div>

@@ -30,7 +30,7 @@ class SiteController extends Controller
 
     public function participationStore(ParticipationRequest $request){
         Mail::to($request->email)->send(new ParticipationMail($request->validated()));
-        ScaleModel::create($request->validated());
+        //ScaleModel::create($request->validated());
         return redirect()
             ->route('participation.confirm')
             ->with('formData', $request->validated());

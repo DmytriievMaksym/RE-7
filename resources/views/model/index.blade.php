@@ -43,34 +43,30 @@
 
                         {{--Категорії--}}
                         <div class="col-md-9">
-                            <label class="form-label fw-semibold text-secondary small text-uppercase d-block">
-                                Категорії:
-                            </label>
-
-                            <div class="d-flex flex-wrap gap-2">
-                                @foreach($categories as $category)
-                                    @php
-                                        $catVal = is_object($category) && isset($category->value) ? $category->value : (string)$category;
-                                        $label = method_exists($category, 'label') ? $category->label() : $catVal;
-                                        $selected = (array) request('categories', []);
-                                        $isChecked = in_array($catVal, $selected);
-                                    @endphp
-
-                                    <div class="form-check form-check-inline m-0">
-                                        <input
-                                            class="btn-check"
-                                            type="checkbox"
-                                            name="categories[]"
-                                            id="filter_cat_{{ $loop->index }}"
-                                            value="{{ $catVal }}"
-                                            {{ $isChecked ? 'checked' : '' }}
-                                        >
-                                        <label class="btn btn-sm {{ $isChecked ? 'btn-warning text-dark fw-bold' : 'btn-outline-secondary' }} rounded-pill px-3" for="filter_cat_{{ $loop->index }}">
-                                            {{ $label }}
-                                        </label>
-                                    </div>
-                                @endforeach
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <label for="nominations-filter" class="form-label fw-semibold text-secondary small text-uppercase mb-0">
+                                    Категорії:
+                                </label>
+                                @if(request()->filled('scale') || request()->filled('nominations'))
+                                    <a href="{{ route('model.index') }}" class="text-decoration-none small text-muted">
+                                        <i class="bi bi-x-circle me-1"></i>Скинути фільтри
+                                    </a>
+                                @endif
                             </div>
+
+                            @php
+                                $selectedNominations = (array) (request('nominations') ?? request('categories') ?? []);
+                            @endphp
+
+                            <select id="nominations-filter" name="nominations[]" multiple>
+                                @foreach($nominations as $nomination)
+                                    <option value="{{ $nomination->key }}"
+                                            data-count="{{ $nomination->models_count ?? 0 }}"
+                                        @selected(in_array($nomination->key, $selectedNominations))>
+                                        {{ $nomination->description }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </form>
@@ -118,9 +114,9 @@
 
                             <td>
                                 <div class="d-flex flex-wrap gap-1">
-                                    @foreach($model->categories as $category)
+                                    @foreach($model->nominations as $nomination)
                                         <span class="badge bg-light text-dark border px-2 py-1 rounded-pill small">
-                                            <i class="bi bi-tag text-warning me-1"></i>{{ $category }}
+                                            <i class="bi bi-tag text-warning me-1"></i>{{ $nomination->name }}
                                         </span>
                                     @endforeach
                                 </div>

@@ -18,8 +18,8 @@ class ModelRequest extends FormRequest
     {
         return [
             'name' => ['required','string'],
-            'categories' => ['required','array','min:1'],
-            'categories.*' => [new Enum(CategoryEnum::class)],
+            'nominations' => ['required','array','min:1'],
+            'nominations.*' => ['string', 'exists:nominations,key'],
             'scale' => ['required','regex:/^1:\d{2,3}$/'],
             'author_id' => ['required','string'],
         ];
@@ -29,7 +29,7 @@ class ModelRequest extends FormRequest
         return [
             'author_id.required' => 'Поле "ID автора" не може бути порожнім.',
             'name.required' => 'Поле "Назва моделі" не може бути порожнім.',
-            'categories.required' => 'Оберіть мінімум одну з запропонованих категорій.',
+            'nominations.required' => 'Оберіть мінімум одну з запропонованих категорій.',
             'scale.required' => 'Поле "Масштаб" не може бути порожнім.',
             'scale.regex' => 'Неправильно введений масштаб, приклад: 1:35.',
         ];
