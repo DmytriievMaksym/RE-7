@@ -41,14 +41,16 @@
 
                         {{-- Номінації --}}
                         <div class="mb-4 pb-3 border-bottom">
-                        <span class="text-secondary small fw-bold text-uppercase d-block mb-2">
-                            <i class="bi bi-tags-fill me-1 text-warning"></i>Номінації та категорії:
-                        </span>
+                            <span class="text-secondary small fw-bold text-uppercase d-block mb-2">
+                                <i class="bi bi-tags-fill me-1 text-warning"></i>Номінації та категорії:
+                            </span>
+
                             <div class="d-flex flex-wrap gap-2">
-                                @foreach($model->categories as $category)
-                                    <span class="badge bg-light text-dark border px-3 py-2 rounded-3 fw-semibold">
-                                    <i class="bi bi-check2-circle text-warning me-1"></i>{{ $category }}
-                                </span>
+                                @foreach($model->nominations as $nomination)
+                                    <span class="badge bg-light text-dark border px-3 py-2 rounded-3 fw-semibold d-inline-flex align-items-center gap-1">
+                                        <i class="bi bi-check2-circle text-warning"></i>
+                                        <span>{{ $nomination->description }}</span>
+                                    </span>
                                 @endforeach
                             </div>
                         </div>

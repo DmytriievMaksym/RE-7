@@ -6,7 +6,7 @@
 
     <form method="POST" action="{{route('country.update',$country)}}">@csrf
         @method("PUT")
-        @include('country.form')
+        @include('country._form')
         <button type="submit">Зберегти зміни</button>
     </form>
 @endsection

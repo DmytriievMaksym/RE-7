@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Scale Models Expo')</title>
+    @vite(['resources/js/app.js','resources/css/app.css'])
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
@@ -63,6 +64,38 @@
         .card-footer .pagination {
             margin-bottom: 0 !important;
             justify-content: center;
+        }
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+        .blog-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .blog-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+        .blog-card-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .blog-card-body {
+            padding: 16px;
+        }
+        .blog-category {
+            font-size: 13px;
+            color: #2563eb;
+        }
+        .blog-meta {
+            font-size: 13px;
+            color: #666;
         }
     </style>
 </head>

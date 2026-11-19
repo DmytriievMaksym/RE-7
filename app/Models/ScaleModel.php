@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class ScaleModel extends Model
 {
@@ -11,18 +12,14 @@ class ScaleModel extends Model
     public $incrementing = true;
     protected $keyType = 'string';
     public $timestamps = false;
-    protected $fillable = ['name','scale','categories','author_id'];
+    protected $fillable = ['name','scale','author_id'];
 
-    protected function casts():array{
-        return ['categories' => 'array'];
-    }
-
-    //Щоб категорії кодувалися кирилицею замість юнікоду
-    protected function setCategoriesAttribute($value): void
-    {
-        $this->attributes['categories'] = json_encode(
-            $value,
-            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
+    public function nominations(): BelongsToMany{
+        return $this->belongsToMany(
+            Nomination::class,
+            'model_nomination',
+            'model_id',
+            'nomination',
         );
     }
 }

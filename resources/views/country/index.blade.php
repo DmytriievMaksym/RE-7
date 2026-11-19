@@ -1,4 +1,4 @@
-@extends('app')
+     @extends('app')
 
 @section('title','Довідник країн')
 @section('content')
