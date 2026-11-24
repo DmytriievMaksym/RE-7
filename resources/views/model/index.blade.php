@@ -26,48 +26,115 @@
             <div class="card-body p-3 bg-white">
                 <form method="GET" action="{{ route('model.index') }}" id="filterForm" onchange="this.submit()">
                     <div class="row g-3">
-                        {{--Масштаб--}}
+                        {{-- Назвою моделі --}}
+                        <div class="col-md-4">
+                            <label for="name" class="form-label fw-semibold text-secondary small text-uppercase">
+                                Назва моделі
+                            </label>
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-text bg-light border-end-0 text-secondary">
+                                    <i class="bi bi-search"></i>
+                                </span>
+                                <input type="text"
+                                       name="name"
+                                       id="name"
+                                       class="form-control border-start-0"
+                                       placeholder="Пошук за назвою..."
+                                       value="{{ request('name') }}">
+                            </div>
+                        </div>
+
+                        {{-- Ім'я автора --}}
+                        <div class="col-md-4">
+                            <label for="authorName" class="form-label fw-semibold text-secondary small text-uppercase">
+                                Пошук за автором
+                            </label>
+                            <div class="input-group input-group-sm">
+                        <span class="input-group-text bg-light border-end-0 text-secondary">
+                            <i class="bi bi-person"></i>
+                        </span>
+                                <input type="text"
+                                       name="authorName"
+                                       id="authorName"
+                                       class="form-control border-start-0"
+                                       placeholder="Введіть ім'я автора..."
+                                       value="{{ request('authorName') }}">
+                            </div>
+                        </div>
+
+                        {{-- Id авторів --}}
+                        <div class="col-md-4">
+                            <label for="authorFilter" class="form-label fw-semibold text-secondary small text-uppercase">
+                                Автор
+                            </label>
+                            <select name="author_id" id="authorFilter" class="form-select form-select-sm" onchange="this.form.submit()">
+                                <option value="">Всі автори</option>
+                                @foreach($authors as $id => $name)
+                                    <option value="{{ $id }}" @selected((string) request('author_id') === (string) $id)>
+                                        {{ $name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        {{-- Масштаб --}}
                         <div class="col-md-3">
                             <label for="scaleFilter" class="form-label fw-semibold text-secondary small text-uppercase">
-                                Масштаб:
+                                Масштаб
                             </label>
-                            <select name="scale" id="scaleFilter" class="form-select form-select-sm">
+                            <select name="scale" id="scaleFilter" class="form-select form-select-sm" onchange="this.form.submit()">
                                 <option value="">Всі масштаби</option>
                                 @foreach($scales as $scaleOption)
-                                    <option value="{{ $scaleOption }}" {{ request('scale') === $scaleOption ? 'selected' : '' }}>
+                                    <option value="{{ $scaleOption }}" @selected(request('scale') === $scaleOption)>
                                         {{ $scaleOption }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
 
-                        {{--Категорії--}}
-                        <div class="col-md-9">
-                            <div class="d-flex justify-content-between align-items-center mb-1">
-                                <label for="nominations-filter" class="form-label fw-semibold text-secondary small text-uppercase mb-0">
-                                    Категорії:
-                                </label>
-                                @if(request()->filled('scale') || request()->filled('nominations'))
-                                    <a href="{{ route('model.index') }}" class="text-decoration-none small text-muted">
-                                        <i class="bi bi-x-circle me-1"></i>Скинути фільтри
-                                    </a>
-                                @endif
-                            </div>
-
+                        {{-- Номінації та категорії --}}
+                        <div class="col-md-6">
+                            <label for="nominations-filter" class="form-label fw-semibold text-secondary small text-uppercase">
+                                Номінації та категорії
+                            </label>
                             @php
                                 $selectedNominations = (array) (request('nominations') ?? request('categories') ?? []);
                             @endphp
-
                             <select id="nominations-filter" name="nominations[]" multiple>
                                 @foreach($nominations as $nomination)
                                     <option value="{{ $nomination->key }}"
+                                            data-description="{{ $nomination->description }}"
                                             data-count="{{ $nomination->models_count ?? 0 }}"
                                         @selected(in_array($nomination->key, $selectedNominations))>
-                                        {{ $nomination->description }}
+                                        {{ $nomination->name }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
+
+                        {{-- Сортування --}}
+                        <div class="col-md-3">
+                            <label for="sortSelect" class="form-label fw-semibold text-secondary small text-uppercase">
+                                Сортування
+                            </label>
+                            <select name="sort" id="sortSelect" class="form-select form-select-sm" onchange="this.form.submit()">
+                                <option value="">За замовчуванням (ID)</option>
+                                <option value="name" @selected(request('sort') === 'name')>Назва (А → Я)</option>
+                                <option value="-name" @selected(request('sort') === '-name')>Назва (Я → А)</option>
+                                <option value="author_id" @selected(request('sort') === 'author_id')>ID автора (зрост.)</option>
+                                <option value="-author_id" @selected(request('sort') === '-author_id')>ID автора (спад.)</option>
+                                <option value="scale" @selected(request('sort') === 'scale')>Масштаб (зрост.)</option>
+                                <option value="-scale" @selected(request('sort') === '-scale')>Масштаб (спад.)</option>
+                            </select>
+                        </div>
+
+                        @if(request()->anyFilled(['name', 'authorName', 'author_id', 'scale', 'nominations', 'sort']))
+                            <div class="col-12 d-flex justify-content-end pt-2 border-top">
+                                <a href="{{ route('model.index') }}" class="btn btn-sm btn-outline-danger rounded-pill px-3 fw-semibold">
+                                    <i class="bi bi-x-circle me-1"></i>Скинути фільтри
+                                </a>
+                            </div>
+                        @endif
                     </div>
                 </form>
             </div>
