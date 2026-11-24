@@ -33,7 +33,7 @@
         <!-- Блок номінацій -->
         <div id="categories" class="mb-5">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="fw-bold border-start border-4 border-warning ps-3 mb-0">Номінації виставки</h2>
+                <h2 class="h3 fw-bold border-0 border-start border-4 border-warning ps-3 mb-0">Номінації виставки</h2>
                 <a href="{{route('participation.form')}}" class="btn btn-outline-warning btn-sm d-none d-md-inline-block text-dark border-warning">
                     Подати модель на конкурс
                 </a>
