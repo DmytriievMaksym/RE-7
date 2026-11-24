@@ -7,12 +7,80 @@
             Додати запис
         </a>
     </p>
+
+    <form method="GET" action="{{ route('blog.admin') }}">
+        <label for="title">Заголовок</label>
+        <input
+            type="text"
+            id="title"
+            name="title"
+            value="{{ request('title') }}"
+            placeholder="Пошук за заголовком"
+        >
+        <label for="categoryName">Назва категорії</label>
+        <input
+            type="text"
+            id="categoryName"
+            name="categoryName"
+            value="{{ request('categoryName') }}"
+            placeholder="Назва категорії"
+        >
+        <label for="category_id">Категорія</label>
+        <select id="category_id" name="category_id" onchange="this.form.submit()">
+            <option value="">Усі категорії</option>
+            @foreach ($categories as $id => $name)
+                <option
+                    value="{{ $id }}"
+                    @selected(request('category_id') == $id)
+                >
+                    {{ $name }}
+                </option>
+            @endforeach
+        </select>
+        <label for="filter_id">Мітка</label>
+        <select id="filter_id" name="filter_id">
+            <option value="">Усі мітки</option>
+            @foreach ($filters as $id => $name)
+                <option
+                    value="{{ $id }}"
+                    @selected(request('filter_id') == $id)
+                >
+                    {{ $name }}
+                </option>
+            @endforeach
+        </select>
+        <input type="hidden" name="sort" value="{{ request('sort') }}">
+
+        <button type="submit">
+            Застосувати
+        </button>
+        <a href="{{ route('blog.admin') }}">
+            Скинути фільтри
+        </a>
+    </form>
+
     <table>
         <thead>
         <tr>
             <th>№</th>
             <th>Заголовок</th>
-            <th>Категорія</th>
+            @php
+                $currentSort = request('sort');
+                $nextSort = $currentSort === 'categoryName'
+                   ? '-categoryName'
+                   : 'categoryName';
+            @endphp
+            <th>
+                <a href="{{route('blog.admin', array_merge(request()->except('sort', 'page'),['sort' => $nextSort]))}}">
+                    Категорія
+                    @if ($currentSort === 'categoryName')
+                        ↑
+                    @elseif ($currentSort === '-categoryName')
+                        ↓
+                    @endif
+                </a>
+            </th>
+            <th>Мітки</th>
             <th>Дата</th>
             <th>Дії</th>
         </tr>
@@ -28,6 +96,13 @@
                 </td>
                 <td>
                     {{ $blog->category?->category_name ?? '—' }}
+                </td>
+                <td>
+                    @forelse ($blog->filters as $filter)
+                        <span class="tag">{{ $filter->filter_name }}</span>
+                    @empty
+                        —
+                    @endforelse
                 </td>
                 <td>
                     {{ $blog->dt_created->format('d.m.Y') }}
