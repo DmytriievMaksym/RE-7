@@ -63,7 +63,22 @@
         <thead>
         <tr>
             <th>№</th>
-            <th>Заголовок</th>
+            @php
+                $currentSort = request('sort');
+                $nextSort = $currentSort === 'title'
+                   ? '-title'
+                   : 'title';
+            @endphp
+            <th>
+                <a href="{{route('blog.admin', array_merge(request()->except('sort', 'page'),['sort' => $nextSort]))}}">
+                    Заголовок
+                    @if ($currentSort === 'title')
+                        ↑
+                    @elseif ($currentSort === '-title')
+                        ↓
+                    @endif
+                </a>
+            </th>
             @php
                 $currentSort = request('sort');
                 $nextSort = $currentSort === 'categoryName'
@@ -81,7 +96,22 @@
                 </a>
             </th>
             <th>Мітки</th>
-            <th>Дата</th>
+            @php
+                $currentSort = request('sort');
+                $nextSort = $currentSort === 'created'
+                   ? '-created'
+                   : 'created';
+            @endphp
+            <th>
+                <a href="{{route('blog.admin', array_merge(request()->except('sort', 'page'),['sort' => $nextSort]))}}">
+                    Дата
+                    @if ($currentSort === 'created')
+                        ↑
+                    @elseif ($currentSort === '-created')
+                        ↓
+                    @endif
+                </a>
+            </th>
             <th>Дії</th>
         </tr>
         </thead>
