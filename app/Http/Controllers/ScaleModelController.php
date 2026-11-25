@@ -2,53 +2,51 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\CategoryEnum;
 use App\Models\ScaleModel;
 use Illuminate\Http\Request;
 use App\Http\Requests\ModelRequest;
 use App\Models\Nomination;
 use Illuminate\Support\Arr;
+use App\Queries\ModelFilter;
+use App\Models\Author;
 
 class ScaleModelController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, ModelFilter $filter)
     {
+        $input = $request->validate([
+            'name' => ['nullable', 'string', 'max:200'],
+            'scale' => ['nullable', 'string', 'max:100'],
+            'author_id' => [
+                'nullable',
+                'integer',
+                'exists:authors,id',
+            ],
+            'authorName' => ['nullable', 'string', 'max:100'],
+            'nominations' => [
+                'nullable',
+                'array',
+            ],
+            'nominations.*' => ['string', 'exists:nominations,key'],
+            'sort' => ['nullable', 'string', 'max:30'],
+        ]);
+
         //Отримую всі масштаби для фільтра
         $scales = ScaleModel::select('scale')
             ->distinct()
             ->orderBy('scale')
             ->pluck('scale');
+        $authors = Author::select('id','name')
+            ->orderBy('name')
+            ->pluck('name','id');
 
-        $selectedNominations = (array) ($request->query('nominations'));
-        $selectedScale = request()->query('scale');
+        $nominations = $filter->nominationsWithCount($input);
 
-        $nominations = Nomination::with('translations')
-            ->withCount(['models' => function ($query) use ($selectedScale, $selectedNominations) {
-                $query->when($selectedScale, function ($q) use ($selectedScale) {
-                    $q->where('scale', $selectedScale);
-                });
-                foreach ($selectedNominations as $key) {
-                    $query->whereHas('nominations', function ($subQ) use ($key) {
-                        $subQ->where('nominations.key', $key);
-                    });
-                }
-            }])
-            ->get();
+        $models = $filter->apply($input)
+            ->paginate(10)
+            ->withQueryString();
 
-        $models = ScaleModel::with('nominations.translations')
-            ->when($selectedScale, function ($query) use ($selectedScale) {
-                $query->where('scale', $selectedScale);
-            })
-            ->when($selectedNominations, function ($query) use ($selectedNominations) {
-                foreach ($selectedNominations as $key) {
-                    $query->whereHas('nominations', function ($q) use ($key) {
-                        $q->where('nominations.key', $key);
-                    });
-                }
-            })
-            ->orderBy('id')->paginate(10)->withQueryString();
-
-        return view('model.index',compact('models','scales','nominations'));
+        return view('model.index',compact('models','scales','nominations','authors'));
     }
 
     public function create()
