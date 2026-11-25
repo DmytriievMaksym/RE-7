@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 @section('title','Редагування фільтра')
 @section('content')
     <h1>Редагування фільтру</h1>

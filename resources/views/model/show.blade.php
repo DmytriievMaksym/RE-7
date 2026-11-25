@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 
 @section('title', $model->name . ' — Scale Models Expo')
 
@@ -68,6 +68,7 @@
                                     <span class="text-secondary small fw-bold text-uppercase d-block">Автор моделі</span>
                                     <div class="d-flex align-items-center gap-2 mt-1">
                                         <i class="bi bi-person-circle text-secondary fs-5"></i>
+                                        <span class="fs-5 fw-bold text-dark">{{ $model->author->name }}</span>
                                     </div>
                                 </div>
                             </div>

@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 @section('title', 'Паспорт проєкту | Scale Models Expo')
 
 @section('content')

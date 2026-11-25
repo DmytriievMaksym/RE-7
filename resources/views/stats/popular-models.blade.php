@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 @section('title', 'Статистика відвідувань')
 @section('content')
     <div class="container py-4">
@@ -42,7 +42,7 @@
                             </td>
 
                             <td class="text-center">
-                            <span class="badge bg-warning text-dark rounded-pill px-3 py-2 fw-bold fs-6">
+                            <span class="badge text-dark rounded-pill px-3 py-2 fw-bold fs-6">
                                 <i class="bi bi-eye-fill me-1"></i>{{ $row->hits }}
                             </span>
                             </td>

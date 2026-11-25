@@ -1,8 +1,8 @@
- @extends('app')
+ @extends('layouts.app')
     @section('title','Заявка на участь')
     @section('content')
         <div class="container py-4" style="max-width: 650px;">
-            <h1 class="h3 fw-bold mb-4 text-uppercase border-start border-4 border-warning ps-3">Форма введення даних</h1>
+            <h1 class="h3 fw-bold mb-4 text-uppercase border-0 border-start border-4 border-warning ps-3">Форма введення даних</h1>
 
             <!--Перелічення полів форми-->
             <div class="card border-0 shadow-sm bg-white p-4 rounded-3">

@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 
 @section('title',$blog->title)
 @section('content')

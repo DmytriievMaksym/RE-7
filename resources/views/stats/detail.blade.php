@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 @section('title', 'Детальна статистика')
 @section('content')
     <div class="container py-4">
