@@ -20,10 +20,6 @@ class Nomination extends Model
         return $this->hasMany(NominationTranslation::class, 'nomination', 'key');
     }
 
-    public function models(): BelongsToMany{
-        return $this->belongsToMany(ScaleModel::class, 'model_nomination', 'nomination', 'model_id');
-    }
-
     public function translate(): ?NominationTranslation
     {
         $locale = App::getLocale();
@@ -41,5 +37,9 @@ class Nomination extends Model
     public function getDescriptionAttribute(): string
     {
         return $this->translate()?->description;
+    }
+
+    public function models(): BelongsToMany{
+        return $this->belongsToMany(ScaleModel::class, 'model_nomination', 'nomination', 'model_id');
     }
 }
