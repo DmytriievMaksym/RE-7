@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 @section('title', 'Адміністрування блогу')
 @section('content')
     <h1>Адміністрування блогу</h1>

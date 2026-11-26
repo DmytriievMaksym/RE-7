@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 @section('title','Заявку надіслано')
 @section('content')
     <div class="container py-4" style="max-width: 650px;">

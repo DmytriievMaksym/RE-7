@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 
 @section('title', 'Таблиця затверджених моделей — Scale Models Expo')
 

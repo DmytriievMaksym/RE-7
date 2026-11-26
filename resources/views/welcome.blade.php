@@ -1,4 +1,4 @@
-@extends("app")
+@extends("layouts.app")
 @section('title', 'Виставка Стендових Моделей')
 
 @section('content')

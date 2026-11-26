@@ -16,7 +16,7 @@ class SetLocale
             $lang = strtolower(substr($request->query('lang'), 0,3));
             Session::put('locale', $lang);
         }
-        App::setLocale(Session::get('locale', config('app.locale', 'uk')));
+        App::setLocale(Session::get('locale', config('app.locale', 'ua')));
         return $next($request);
     }
 }

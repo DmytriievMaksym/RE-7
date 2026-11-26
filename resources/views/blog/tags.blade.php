@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 @section('title', 'Керування мітками')
 @section('content')
     <h1>Мітки: {{ $blog->title }}</h1>
